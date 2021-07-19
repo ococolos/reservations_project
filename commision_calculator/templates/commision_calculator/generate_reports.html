@@ -1,0 +1,32 @@
+{% extends "commision_calculator/_base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+    
+<h4>Total Guest Ready commision:</h4> 
+<small> {{ GR_total_commision }}</small><br/><br/>
+
+{% if cities_not_in_db %}
+<h4>We also found data for cities not currently in the DB:</h4> {{cities_not_in_db}}<br/><br/>
+{% endif %}
+
+<h4>Guest Ready commision for each month:</h4>
+<small> {{ GR_commision_per_month }}</small><br/><br/>
+
+{% if city_commision %}
+<h4>Commision for {{ city_name }}:</h4>
+<small>{{ city_commision }}</small><br/><br/>
+{% endif %}
+
+<form method="post">
+    {% csrf_token %}
+    <fieldset class="form-group">
+        <legend class="border-bottom mb-4">Generate a commision report for a particular city</legend>
+            {{ form|crispy }}
+    </fieldset>
+    <div class="form-group">
+        <button class="btn btn-outline-primary" type="submit">Generate</button>
+    </div>
+
+{% endblock content %}

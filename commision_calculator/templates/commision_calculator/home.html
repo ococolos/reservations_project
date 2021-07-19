@@ -1,0 +1,33 @@
+{% extends "commision_calculator/_base.html" %}
+
+{% block content %}
+
+
+{% if reservations %}
+    <h4>Available reservations</h4>
+    <table class="table table-hover table-sm table-bordered">
+        <thead class="thead-light">
+            <tr scope="row">
+                <th scope="col" style="width:10%"><b>Property Name</b></th>
+                <th scope="col" style="width:10%"><b>City</b></th>
+                <th scope="col" style="width:10%"><b>Net income</b></th>
+                <th scope="col" style="width:10%"><b>Date</b></th>
+            </tr>
+        </thead>  
+        <tbody>      
+            {% for item in reservations %}
+                <tr scope="row">
+                    <td>{{ item.property_name }}</td>
+                    <td>{{ item.city }}</td>
+                    <td>{{ item.net_income }}</td>
+                    <td>{{ item.date }}</td>
+
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+<h3>No reservations have been uploaded to the platform. If you wish to upload a CSV file, proceed to the <a href="{% url 'upload_csv' %}">upload page.</a></h3>
+{% endif %}
+
+{% endblock content %}
